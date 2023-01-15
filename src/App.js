@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Headers from "./component/Headers";
+import { makeStyles } from "@material-ui/core";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Food from "./component/Food";
+import FoodItemPage from "./component/FoodItemPage";
+import UserTable from "./component/UserTable";
+import Adduser from "./user/Adduser"
+import Edituser from "./user/Edituser"
+import User from "./user/User"
 
 function App() {
+  const useStyles = makeStyles(() => ({
+    App: {
+      backgroundColor: "#14161a",
+      color: "white",
+      minHeight: "100vh",
+    },
+  }));
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className={classes.App}>
+        <Headers />
+        <Routes>
+          <Route path="/" element={<Food />} />
+          <Route path="/usertable" element={<UserTable />} />
+          <Route path="/users/add" element={<Adduser />} />
+          <Route path="/users/edit/:id" element={<Edituser />} />
+          <Route path="/users/:id" element={<User />} />
+          <Route path="/IngredientDetails/:id" element={<FoodItemPage/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
