@@ -8,6 +8,10 @@ import User from "./user/User"
 import Movie from "./component/Movie";
 import MovieItemPage from "./component/MovieItemPage";
 
+// This movie app is basely base on Fetching data from api's, performing crud functionality & perform
+// edit/veiw/delete functionality on manually added data . In this project, I have used material ui , react Js ,
+//  html5, css,context api's. 
+
 // This component is use to perform routing 
 function App() {
   const useStyles = makeStyles(() => ({
