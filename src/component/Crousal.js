@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
+// Crousal component - It is use to show Automatic Crousal
+
 const Crousal = () => {
   const [movies, setMovies] = useState([]);
   
@@ -21,21 +23,6 @@ const Crousal = () => {
     getData();
   }, []);
 
-  const useStyles = makeStyles((theme) => ({
-    carousel: {
-      height: "50%",
-      display: "flex",
-      alignItems: "center",
-    },
-    carouselItem: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      cursor: "pointer",
-      textTransform: "uppercase",
-      color: "white",
-    },
-  }));
 
   const handleDragStart = (e) => e.preventDefault();
 

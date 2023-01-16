@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom"
-import axios from "axios";
 import { globalState } from '../Context';
 import { useContext } from 'react';
 
-
+// Adduser Component is use to add details of Movie.
 function Adduser() {
     const form={
         marginLeft:"25%",
@@ -28,22 +27,7 @@ function Adduser() {
         marginTop:"2.5%",
         textAlign:"center"
     }
-// _________________________________________
-    const[image,setImage]=useState();
 
-    function filehandle(e){
-       
-        setImage(e.target.files[0])
-        console.log(image)
-        e.stopPropagation()      
-    }
-    function uploadhandle(e){
-       
-        const imageData = URL.createObjectURL(image);
-        localStorage.setItem('image', imageData);
-        e.stopPropagation()
-    }
-    // _____________________________________
     let navigate = useNavigate();
     const {adddata,setAdddata}=useContext(globalState);
     
@@ -75,6 +59,7 @@ let {Actor_Name,Actor_Gender, Actor_DOB, Actor_Bio, Movie_Name,Year_of_release,P
         navigate('/')
     }
     
+    // adding details of a Movie
   return (
     <div className="container">
         <div className='w-75 mx-auto shadow p-4 mt-4'>

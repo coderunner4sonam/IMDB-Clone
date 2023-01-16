@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { globalState } from '../Context';
-import { useContext } from "react";
 
-const foodItemStyle = {
+const MovieItemStyle = {
   padding : '1rem',
   height: '22rem',
   width: '20rem',
@@ -14,17 +12,7 @@ const foodItemStyle = {
   
 }
 
-const fooditemButtonStyle ={
-  padding: '4px',
-  width:'80px',
-  cursor: 'pointer',
-}
-
-const h3Style = {
-  fontWeight: 'bold',
-  color: 'black',
-}
-const foodlabelstyle ={
+const Movielabelstyle ={
     outline: "none",
     padding: "0.3rem 0.5rem",
     top: "2.5rem",
@@ -35,23 +23,26 @@ const foodlabelstyle ={
     color: "black",
 
 }
-const foodimgstyle = {
+const Movieimgstyle = {
     marginTop: '0',
     width: '95%',
     height:"80%"
 }
 
-export default function FoodItem({ele}) {
+//  Moviecontent component -This component is use to access data from API 
+
+export default function Moviecontent({ele}) {
       console.log(ele)
     let Label = ele?.title;
     console.log(Label)
    
   return (
     <>
-     <Link to={`/IngredientDetails/${Label}`}>
-     <div style={foodItemStyle}>
-       <img src={`https://image.tmdb.org/t/p/original${ele?.poster_path}`} alt="food_image" style={foodimgstyle} />
-       <div style={foodlabelstyle}>{Label}</div>
+    {/* access data from API */}
+     <Link to={`/foodItempage/${Label}`}>
+     <div style={MovieItemStyle}>
+       <img src={`https://image.tmdb.org/t/p/original${ele?.poster_path}`} alt="food_image" style={Movieimgstyle} />
+       <div style={Movielabelstyle}>{Label}</div>
      </div>
    </Link>
    </>

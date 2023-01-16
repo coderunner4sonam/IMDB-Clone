@@ -1,19 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import FoodItem from "./FoodItem";
 import { Pagination } from "@material-ui/lab";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
 import Crousal from "./Crousal";
 import {
   Container,
   createTheme,
   ThemeProvider,
-  TextField,
 } from "@material-ui/core";
 import { globalState } from "../Context";
-import Alert from "./Alert";
 import MovieItem from "./MovieItem";
+import Moviecontent from "./Moviecontent";
 
 const CoinStyle = {
   maxWidth: "100%",
@@ -29,13 +25,13 @@ const CoinStyle = {
   overflow: "hidden",
   fontFamily: "poppins",
 };
+// Movie.js - This component is use to show 1) Data - fetch from API , 2) Add data of Movie & 3) pagination
 
-export default function Food() {
+export default function Movie() {
   const [page, setPage] = useState(1); // pagination
   let [query, setQuery] = useState("Puss in Boots: The Last Wish");
   const { movies, setMovies } = useContext(globalState);
   const{adddata,setAdddata}=useContext(globalState);
-  const [submituery, setSubmitQuery] = useState();
   const [filtermovies, setFiltermovies] = useState([]);
 
   const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
@@ -48,42 +44,9 @@ export default function Food() {
     setFiltermovies(movies);
   };
   console.log(query);
-  // console.log(movies);
   useEffect(() => {
     getData();
   }, []);
-
-  const onsubmit = (e) => {
-    // e.preventDefault();
-    setSubmitQuery(query);
- 
-   const temp= movies.filter(element=>{
-          element?.title.includes(query);
-        })
-      setFiltermovies([...temp]);
-  };
-
-
-  
-  
- 
-
-  
-  const useStyles = makeStyles({
-    row: {
-      backgroundColor: "#16171a",
-      cursor: "pointer",
-      "&:hover": {
-        backgroundColor: "#131111",
-      },
-      fontFamily: "Montserrat",
-    },
-    pagination: {
-      "& .MuiPaginationItem-root": {
-        color: "gold",
-      },
-    },
-  });
 
   const darkTheme = createTheme({
     palette: {
@@ -103,32 +66,30 @@ console.log(filtermovies)
         <Container style={{ textAlign: "center" }}>
           <br />
           <br />
-          {alert !== "" && <Alert alert={alert} />}
-      
           <br />
         </Container>
       </ThemeProvider>
+    {/* 1) Data - fetch from API */}
+      <div style={CoinStyle}>
+        {
+        // fetched data and pass to Moviecontent
+        movies.slice((page - 1) * 6, page * 6).map((ele, ind) => {
+        
+          return <Moviecontent ele={ele}  key={ind} />;
+
+        })}
+      </div>
+      {/* 2) Add data of Movie  */}
       <div style={CoinStyle}>
         {
         
         adddata.map((ele, ind) => {
-          //array slice [0,1,2,3,4,5].map
-        
           return <MovieItem ele={ele} ind={ind} key={ind} />;
 
         })}
       </div>
 
-      <div style={CoinStyle}>
-        {
-        
-        movies.slice((page - 1) * 6, page * 6).map((ele, ind) => {
-          //array slice [0,1,2,3,4,5].map
-        
-          return <FoodItem ele={ele}  key={ind} />;
-
-        })}
-      </div>
+      {/*  3) pagination */}
       <Pagination
         style={{
           display: "flex",

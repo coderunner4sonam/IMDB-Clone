@@ -28,6 +28,8 @@ const darkTheme = createTheme({
   },
 });
 
+// Headers component - It is use to show Logo and Add Movie button on the top of the page
+
 const Headers = () => {
   const navigate = useNavigate();
   const classes = useStyles();
@@ -39,12 +41,12 @@ const Headers = () => {
         <AppBar color="transparent" position="static">
           <Container>
             <Toolbar>
-    
+            {/* logo */}
               <Typography variant="h6" className={classes.title} onClick={()=>{navigate('/')}}>
                   IMDB
                   
               </Typography>
-          
+
               <Button
                 onClick={onsubmit}
                 variant="outlined"
@@ -55,7 +57,8 @@ const Headers = () => {
                   border: "0.2px solid grey",
                 }}
               >
-                <NavLink  exact to="/users/add" >
+                {/* Add Movie button */}
+                <NavLink  exact to="/users/add"  style={{color:"lightgreen"}}>
                       Add Movie
                 </NavLink>
               </Button>

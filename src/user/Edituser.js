@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { globalState } from "../Context";
 
+// Edituser Component is use to Edit the details of the Added Movie 
 function Edituser() {
   const form={
     marginLeft:"25%",
@@ -38,8 +39,8 @@ const formcontrol={
   useEffect(() => {
     for (let i = 0; i < adddata.length; i++) {
       if (adddata[i].name === id) {
-        setUser({ ...adddata[i] }); // edit krna hai 
-        setEditindex(i); // index adddata , 
+        setUser({ ...adddata[i] }); 
+        setEditindex(i); 
     
         break;
       }
@@ -59,24 +60,24 @@ const formcontrol={
   let submitform = (e) => {
     e.preventDefault();
     
-    let temp = [...adddata];//10 array in adddata
+    let temp = [...adddata];
     console.log(adddata);
     console.log(temp);
     console.log(editindex);
     for (let i = 0; i < temp.length; i++) {
 
         console.log(temp[i]);
-        if (i==editindex) { // which index going to be edit 
+        if (i==editindex) { 
             console.log(temp[i]);
             console.log(user);
-            temp[i]={...temp[i],...user}    //old data =temp, new data in user 
+            temp[i]={...temp[i],...user}  
           break;
         }
       }
     setAdddata(temp);
     navigate("/");
   };
-
+// Edituser Component is use to Edit the details of the Added Movie 
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-4 mt-4">

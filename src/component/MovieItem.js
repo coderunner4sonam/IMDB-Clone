@@ -4,7 +4,7 @@ import { globalState } from "../Context";
 import { useContext } from "react";
 import cinema from "../cinema.png"
 
-const foodItemStyle = {
+const MovieItemStyle = {
   padding: "1rem",
   height: "28rem",
   width: "20rem",
@@ -38,6 +38,8 @@ const label={
 underline:"none"
 }
 
+// MovieItem Component - It is use to show Crud functionality - veiw / edit / delete on Add Movie Details
+
 export default function MovieItem({ ele ,ind}) {
     const {adddata,setAdddata}=useContext(globalState);
   console.log(ele);
@@ -65,7 +67,7 @@ export default function MovieItem({ ele ,ind}) {
   return (
     <>
       <Link>
-        <div style={foodItemStyle}>
+        <div style={MovieItemStyle}>
             <p className={"label"} style={label}>Actor Name: {Actor_Name}</p>
             <p className={"label"} style={label}>Actor Gender: {Actor_Gender}</p>
             <p className={"label"} style={label}>Actor DOB: {Actor_DOB}</p>
@@ -78,6 +80,7 @@ export default function MovieItem({ ele ,ind}) {
             <p className={"label"} style={label}>Producer DOB: {Producer_DOB}</p>
             <p className={"label"} style={label}>Producer Bio: {Producer_Bio}</p>
            
+           {/* veiw / edit / delete work on Add movie detail card */}
             <Link className="veiwbutton" style={veiwbutton} exact to={`/users/`}>
               Veiw
             </Link>

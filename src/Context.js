@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { createContext } from 'react'
 export const globalState= createContext()
 
-
+// Context Component is use to manage the data globally
 
 function Context({children}) {
     const [query,setQuery]=useState("")
