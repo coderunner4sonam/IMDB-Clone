@@ -55,7 +55,7 @@ const Headers = () => {
                   border: "0.2px solid grey",
                 }}
               >
-                <NavLink  exact to="/users/add">
+                <NavLink  exact to="/users/add" >
                       Add Movie
                 </NavLink>
               </Button>

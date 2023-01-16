@@ -24,7 +24,7 @@ const formcontrol={
   let { id } = useParams();
   console.log(id);
   
-  const {movies, setMovies}=useContext(globalState);
+  const {adddata,setAdddata}=useContext(globalState);
  
     let[user,setUser]=useState({
         Actor_Name:"",
@@ -49,9 +49,9 @@ let {Actor_Name,Actor_Gender, Actor_DOB, Actor_Bio, Movie_Name,Year_of_release,P
   }, []);
 
   const loaduser = () => {
-    for(let i=0;i<movies.length;i++){
-      if(movies[i].name===id){
-        setUser(movies[i]);
+    for(let i=0;i<adddata.length;i++){
+      if(adddata[i].name===id){
+        setUser(adddata[i]);
       }
     }
        

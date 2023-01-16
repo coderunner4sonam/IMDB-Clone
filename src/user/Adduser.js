@@ -4,6 +4,7 @@ import axios from "axios";
 import { globalState } from '../Context';
 import { useContext } from 'react';
 
+
 function Adduser() {
     const form={
         marginLeft:"25%",
@@ -27,11 +28,26 @@ function Adduser() {
         marginTop:"2.5%",
         textAlign:"center"
     }
+// _________________________________________
+    const[image,setImage]=useState();
 
-
+    function filehandle(e){
+       
+        setImage(e.target.files[0])
+        console.log(image)
+        e.stopPropagation()      
+    }
+    function uploadhandle(e){
+       
+        const imageData = URL.createObjectURL(image);
+        localStorage.setItem('image', imageData);
+        e.stopPropagation()
+    }
+    // _____________________________________
     let navigate = useNavigate();
-    const {movies, setMovies}=useContext(globalState);
- 
+    const {adddata,setAdddata}=useContext(globalState);
+    
+
     let[user,setUser]=useState({
         Actor_Name:"",
         Actor_Gender:"",
@@ -55,10 +71,10 @@ let {Actor_Name,Actor_Gender, Actor_DOB, Actor_Bio, Movie_Name,Year_of_release,P
 
     let submitform = async e =>{
         e.preventDefault();
-        setMovies([user,...movies]);
+        setAdddata([user,...adddata]);
         navigate('/')
     }
-
+    
   return (
     <div className="container">
         <div className='w-75 mx-auto shadow p-4 mt-4'>

@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { globalState } from "../Context";
 import Alert from "./Alert";
+import MovieItem from "./MovieItem";
 
 const CoinStyle = {
   maxWidth: "100%",
@@ -33,6 +34,7 @@ export default function Food() {
   const [page, setPage] = useState(1); // pagination
   let [query, setQuery] = useState("Puss in Boots: The Last Wish");
   const { movies, setMovies } = useContext(globalState);
+  const{adddata,setAdddata}=useContext(globalState);
   const [submituery, setSubmitQuery] = useState();
   const [filtermovies, setFiltermovies] = useState([]);
 
@@ -61,26 +63,10 @@ export default function Food() {
       setFiltermovies([...temp]);
   };
 
-  const onchange = (e) => {
-    // e.preventDefault();
-    setQuery(e.target.value);
-    console.log(query);
 
-  };
   
   
-  
-  // useEffect(()=>{
-  //   setPage(1);
-
-  // },[query])
-  
-  // const filtermovies=()=>{
-  //   return movies.filter(element=>{
-  //     element?.title.includes(query);
-  //   })
-  // }
-
+ 
 
   
   const useStyles = makeStyles({
@@ -118,40 +104,32 @@ console.log(filtermovies)
           <br />
           <br />
           {alert !== "" && <Alert alert={alert} />}
-          <TextField
-            label="Search For The Movies.."
-            variant="outlined"
-            style={{ marginBottom: 20, width: "90%" }}
-            onChange={onchange}
-          />
-
-          <Button
-            onClick={onsubmit}
-            variant="outlined"
-            style={{
-              width: 85,
-              height: 54,
-              color: "white",
-              border: "0.2px solid grey",
-            }}
-          >
-            Search
-          </Button>
-
+      
           <br />
         </Container>
       </ThemeProvider>
       <div style={CoinStyle}>
         {
         
-        filtermovies.map((ele, id) => {
+        adddata.map((ele, ind) => {
           //array slice [0,1,2,3,4,5].map
         
-          return <FoodItem ele={ele} key={id} />;
+          return <MovieItem ele={ele} ind={ind} key={ind} />;
 
         })}
       </div>
-      {/* <Pagination
+
+      <div style={CoinStyle}>
+        {
+        
+        movies.slice((page - 1) * 6, page * 6).map((ele, ind) => {
+          //array slice [0,1,2,3,4,5].map
+        
+          return <FoodItem ele={ele}  key={ind} />;
+
+        })}
+      </div>
+      <Pagination
         style={{
           display: "flex",
           justifyContent: "center",
@@ -164,7 +142,7 @@ console.log(filtermovies)
           setPage(value);
           window.scroll(0, 6);
         }}
-      /> */}
+      />
     </>
   );
 }

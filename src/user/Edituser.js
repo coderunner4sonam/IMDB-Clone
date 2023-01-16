@@ -28,16 +28,18 @@ const formcontrol={
 }
 
   let navigate = useNavigate();
-  let { id } = useParams();//vikas
-  const {movies, setMovies}=useContext(globalState);
+  let { id } = useParams();
+  console.log(id)
+  
+  const {adddata,setAdddata}=useContext(globalState);
   let [user, setUser] = useState({});
   const[editindex,setEditindex]=useState();
 
   useEffect(() => {
-    for (let i = 0; i < movies.length; i++) {
-      if (movies[i].name === id) {
-        setUser({ ...movies[i] }); // edit krna hai 
-        setEditindex(i); // index movies , 
+    for (let i = 0; i < adddata.length; i++) {
+      if (adddata[i].name === id) {
+        setUser({ ...adddata[i] }); // edit krna hai 
+        setEditindex(i); // index adddata , 
     
         break;
       }
@@ -57,8 +59,8 @@ const formcontrol={
   let submitform = (e) => {
     e.preventDefault();
     
-    let temp = [...movies];//10 array in movies
-    console.log(movies);
+    let temp = [...adddata];//10 array in adddata
+    console.log(adddata);
     console.log(temp);
     console.log(editindex);
     for (let i = 0; i < temp.length; i++) {
@@ -71,7 +73,7 @@ const formcontrol={
           break;
         }
       }
-    setMovies(temp);
+    setAdddata(temp);
     navigate("/");
   };
 
