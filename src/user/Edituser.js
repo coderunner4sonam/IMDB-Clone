@@ -4,17 +4,40 @@ import { useNavigate, useParams } from "react-router-dom";
 import { globalState } from "../Context";
 
 function Edituser() {
+  const form={
+    marginLeft:"25%",
+    width:"250px"
+}
+
+const btn={
+    width:"650px",
+    height:"35px",
+    marginTop:"2.5%",
+    color:"lightgreen",
+    backgroundColor:"green"
+}
+const textcenter={
+    marginLeft:"45%"
+}
+
+const formcontrol={
+    width:"650px",
+    height:"25px",
+    marginTop:"2.5%",
+    textAlign:"center"
+}
+
   let navigate = useNavigate();
   let { id } = useParams();//vikas
-  const { store, setStore } = useContext(globalState);//array 10
+  const {movies, setMovies}=useContext(globalState);
   let [user, setUser] = useState({});
   const[editindex,setEditindex]=useState();
 
   useEffect(() => {
-    for (let i = 0; i < store.length; i++) {
-      if (store[i].name === id) {
-        setUser({ ...store[i] }); // edit krna hai 
-        setEditindex(i); // index store , 
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].name === id) {
+        setUser({ ...movies[i] }); // edit krna hai 
+        setEditindex(i); // index movies , 
     
         break;
       }
@@ -23,7 +46,9 @@ function Edituser() {
     
   }, []);
   console.log(editindex);   
-  let { name, username, grades, email, phone, website } = user;
+  let {Actor_Name,Actor_Gender, Actor_DOB, Actor_Bio, Movie_Name,Year_of_release,Poster,
+    Producer_Name, Producer_Gender, Producer_DOB, Producer_Bio,}=user;
+
 
   function handleuserinput(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -32,8 +57,8 @@ function Edituser() {
   let submitform = (e) => {
     e.preventDefault();
     
-    let temp = [...store];//10 array in store
-    console.log(store);
+    let temp = [...movies];//10 array in movies
+    console.log(movies);
     console.log(temp);
     console.log(editindex);
     for (let i = 0; i < temp.length; i++) {
@@ -46,96 +71,50 @@ function Edituser() {
           break;
         }
       }
-    setStore(temp);
+    setMovies(temp);
     navigate("/");
   };
-// temp[i] :  {name: 'vikas', username: 'gklkgkk', grades: 'B', email: 'Anupam@gmail.com', phone: '59565695444', …}
-// user:{name: 'vikas sharma', username: 'gklkgkk', grades: 'B', email: 'Anupam@gmail.com', phone: '59565695444', …}
-
-//   console.log(store);
-// temp=[1,2,3]
-// temp=[...temp,5]
-//[1,2,3,5]
-
-// temp={name:"sonam",id:"fsdjkfkd"}
-// user={name:"puja",username: 'gklkgkk', grades: 'B', email: 'Anupam@gmail.com', phone: '59565695444'}
-// temp={...temp,user} 
-// temp={name:"puja",id:"fsdjkfkd",{name:"puja"}}  
-
-
 
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-4 mt-4">
-        <h2 className="text-center mb-2">Edit A User</h2>
-        <form onSubmit={(e) => submitform(e)}>
-          <div className="form-group">
-            <input
-              type={"text"}
-              name="name"
-              className="form-control form-control-lg mb-3"
-              value={name}
-              onChange={(e) => handleuserinput(e)}
-              placeholder="Enter Your Name"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={"text"}
-              name="username"
-              className="form-control form-control-lg mb-3"
-              value={username}
-              onChange={(e) => handleuserinput(e)}
-              placeholder="Enter Your Username"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={"text"}
-              name="grades"
-              className="form-control form-control-lg mb-3"
-              value={grades}
-              onChange={(e) => handleuserinput(e)}
-              placeholder="Enter Student Grade"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={"email"}
-              name="email"
-              className="form-control form-control-lg mb-3"
-              value={email}
-              onChange={(e) => handleuserinput(e)}
-              placeholder="Enter Your E-mail Address"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={"number"}
-              name="phone"
-              className="form-control form-control-lg mb-3"
-              value={phone}
-              onChange={(e) => handleuserinput(e)}
-              placeholder="Enter Your Phone Number"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type={"text"}
-              name="website"
-              className="form-control form-control-lg mb-3"
-              value={website}
-              onChange={(e) => handleuserinput(e)}
-              placeholder="Enter Your Student class"
-            />
-          </div>
-          <button
-            className="btn btn-primary btn-block"
-            style={{ width: "100%" }}
-          >
-            Save
-          </button>
-        </form>
+      <h2 className='textcenter' style={textcenter}>Add A Movie</h2>
+            <form onSubmit={e=>submitform(e)} className="form" style={form}>
+                <div className='form-group'>
+                    <input type={"text"} name="Actor_Name" className="formcontrol" style={formcontrol} value={Actor_Name} onChange={(e)=>handleuserinput(e)} placeholder='Enter  Actor_Name' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Actor_Gender" className="formcontrol" style={formcontrol} value={Actor_Gender} onChange={(e)=>handleuserinput(e)}  placeholder='Enter  Actor_Gender' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Actor_DOB" className="formcontrol" style={formcontrol} value={Actor_DOB} onChange={(e)=>handleuserinput(e)}  placeholder='Enter Student Actor_DOB' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Actor_Bio" className="formcontrol" style={formcontrol} value={Actor_Bio} onChange={(e)=>handleuserinput(e)} placeholder='Enter  Actor_Bio' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Movie_Name" className="formcontrol" style={formcontrol} value={Movie_Name} onChange={(e)=>handleuserinput(e)} placeholder='Enter  Movie_Name' />
+                </div>
+                <div className='form-group'>
+                    <input type={"number"} name="Year_of_release" className="formcontrol" style={formcontrol} value={Year_of_release} onChange={(e)=>handleuserinput(e)} placeholder='Enter Year_of_release ' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Poster" className="formcontrol" style={formcontrol} value={Poster} onChange={(e)=>handleuserinput(e)} placeholder='Enter Poster Name' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Producer_Name" className="formcontrol" style={formcontrol} value={Producer_Name} onChange={(e)=>handleuserinput(e)} placeholder='Enter Producer_Name' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Producer_DOB" className="formcontrol" style={formcontrol}value={Producer_DOB} onChange={(e)=>handleuserinput(e)} placeholder='Enter  Producer_DOB ' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Producer_Gender" className="formcontrol" style={formcontrol} value={Producer_Gender} onChange={(e)=>handleuserinput(e)} placeholder='Enter  Producer_Gender ' />
+                </div>
+                <div className='form-group'>
+                    <input type={"text"} name="Producer_Bio" className="formcontrol" style={formcontrol} value={Producer_Bio} onChange={(e)=>handleuserinput(e)} placeholder='Enter  Producer_Bio ' />
+                </div>
+                <button  className="btn" style={btn} >Add User</button>
+            </form>
       </div>
     </div>
   );

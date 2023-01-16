@@ -1,6 +1,6 @@
 import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,NavLink} from "react-router-dom";
 
 import {
   createTheme,
@@ -55,7 +55,9 @@ const Headers = () => {
                   border: "0.2px solid grey",
                 }}
               >
-                Login
+                <NavLink  exact to="/users/add">
+                      Add Movie
+                </NavLink>
               </Button>
             </Toolbar>
           </Container>

@@ -24,16 +24,15 @@ export default function UserTable() {
   const [page, setPage] = useState(1);
   const {setCount}=useContext(globalState); 
   let [user, setUser] = useState([]);
-  const {store,setStore}=useContext(globalState);
+  const {movies, setMovies}=useContext(globalState);
   let [loading, setloading] = useState(false); //page load
   let userfilter = [];
 
   const { text } = useContext(globalState); // searching 
 
   const loaduser = () => {
-    // let result = await axios.get("http://localhost:3003/users");
-
-    setUser(store);
+ 
+    setUser(movies);
     console.log(user);
     setloading(false);
   };
@@ -58,7 +57,7 @@ export default function UserTable() {
     setTimeout(() => {
       loaduser();
     }, 200);
-  }, [store]);
+  }, [movies]);
 
   const useStyles = makeStyles({
     row: {
@@ -92,10 +91,10 @@ export default function UserTable() {
   }, []);
 
   const deleteUser = (id) => {
-    let temp = store.filter((element,idx)=>{
+    let temp = movies.filter((element,idx)=>{
       return idx!==id;
     });
-    setStore(temp);
+    setMovies(temp);
     loaduser();
   };
   
